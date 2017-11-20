@@ -1,0 +1,11 @@
+<p align='right'><a href='/main/dashboard'>Dashboard</a>|<a href='/logout'>Logout</a> </p>
+
+
+<h3>Posts by {{user.alias}}</h3>
+
+
+
+{%for q in quotes%}
+<p>{{q.name}}: "{{q.message}}"</p>
+
+{%endfor%}

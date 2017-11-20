@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <p align='right'>a href='/logout'>Logout</a> </p>
+    <h3>Hello, {{user.alias}}</h3>
+
+    <h4>Quotable Quotes</h4>
+    {%for q in quotes%}
+    <p>{{q.name}}: "{{q.message}}", Posted by: <a href='/main/show/{{user.id}}'>{{q.creator.alias}}</a> <a href='/main/favorite/{{q.id}}'>Add to Favorites</a>
+    {%endfor%}
+
+
+    <h5>Contribute a Quote</h5>
+
+    {% if messages %}
+        {% for message in messages %}
+            {{ message }}
+        {% endfor %}
+    {% endif %}
+
+    <form action='/main/add' method='post'>
+        {% csrf_token %}
+        Quoted By:   <input type='text'name ='person' ><br>
+
+        Message: <textarea name="message"></textarea><br>
+        <input type='submit' value='submit'>
+
+
+    </form>
+
+    <h3>Your Favorites</h3>
+    {%for q in user.favorites.all%}
+    <p>{{q.name}}: "{{q.message}}"</p>
+    {%endfor%}
+    
+</body>
+</html>
